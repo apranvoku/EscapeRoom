@@ -58,7 +58,7 @@ public class SlideManager : MonoBehaviour
                 int childIndex = i * 3 + j; //Ex: 3rd row 1st column is child number 7. Remember 0 <= i <= 2 & 0<= j <= 2.
                 if(childIndex == 8) //There is no child index 8, SInce there are 8 tiles indexed from 0 - 7 So we're done.
                 {
-                    Debug.Log("Good job you dirty boy.");
+                    Debug.Log("Good job!");
                     solved = true;
                     return;
                 }
