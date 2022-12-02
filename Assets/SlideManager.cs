@@ -21,6 +21,7 @@ public class SlideManager : MonoBehaviour
 
     public bool shuffled = false;
     public bool solved = false;
+    public int shuffles = 20;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +43,7 @@ public class SlideManager : MonoBehaviour
         {
             child.GetComponent<Tile>().AssignPosition();
         }
-        for (int x = 0; x < 20; x++)
+        for (int x = 0; x < shuffles; x++)
         {
             Shuffle();
         }
