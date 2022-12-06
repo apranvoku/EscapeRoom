@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SM = transform.parent.GetComponent<SlideManager>();
+
     }
 
     // Update is called once per frame
@@ -19,10 +19,16 @@ public class Tile : MonoBehaviour
         
     }
 
+    public void SetSM(SlideManager newSM)
+    {
+        SM = newSM;
+    }
+
     public void AssignPosition()
     {
-        Position = SM.GetIndex(SM.slidePuzzle, transform.gameObject);
-        //Debug.Log(transform.gameObject.name + Position.Item1 + Position.Item2);
+        Debug.Log(SM.name);
+        Position = SM.GetIndex(transform.gameObject);
+        Debug.Log(transform.gameObject.name + Position.Item1 + Position.Item2);
     }
 
     public void OnMouseDown()

@@ -41,6 +41,7 @@ public class SlideManager : MonoBehaviour
 
         foreach (Transform child in transform)
         {
+            child.GetComponent<Tile>().SetSM(transform.GetComponent<SlideManager>());
             child.GetComponent<Tile>().AssignPosition();
         }
         for (int x = 0; x < shuffles; x++)
@@ -84,18 +85,19 @@ public class SlideManager : MonoBehaviour
         transform.GetChild(random).GetComponent<Tile>().SlideTile();
     }
 
-    public Tuple<int, int> GetIndex(GameObject[,] array, GameObject searchItem)
+    public Tuple<int, int> GetIndex(GameObject searchItem)
     {
-        for(int i = 0; i < array.GetLength(0); i++)
+        for(int i = 0; i < slidePuzzle.GetLength(0); i++)
         { 
-            for(int j = 0; j < array.GetLength(1); j++)
+            for(int j = 0; j < slidePuzzle.GetLength(1); j++)
             {
-                if(array[i,j] == searchItem)
+                if(slidePuzzle[i,j].name == searchItem.name)
                 {
                     return Tuple.Create(i, j);
                 }
             }
         }
+        Debug.Log("Not Found");
         return null;
     }
     // Update is called once per frame
