@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class maze_movement : MonoBehaviour
 {
+    public GameObject ball;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ball = GameObject.Find("Sphere");
+        ball.GetComponent<Rigidbody>().sleepThreshold = 0.0f;
     }
 
     // Update is called once per frame
@@ -15,7 +17,7 @@ public class maze_movement : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
-        transform.Rotate(horizontal, 0, vertical);
+        //Debug.Log(horizontal + ":" + vertical);
+        transform.Rotate(-vertical*0.3f, 0, horizontal*0.3f);
     }
 }
