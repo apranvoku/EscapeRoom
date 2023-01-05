@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Cursor.lockState = CursorLockMode.Locked;
         controller = gameObject.AddComponent<CharacterController>();
         Head = GameObject.Find("XR Origin");
         rb = transform.GetComponent<Rigidbody>();

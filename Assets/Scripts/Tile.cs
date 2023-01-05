@@ -7,6 +7,17 @@ public class Tile : MonoBehaviour
 {
     public Tuple<int, int> Position;
     SlideManager SM;
+    public delegate void OnClick();
+    public static event OnClick onTile;
+
+    private void OnEnable()
+    {
+        Tile.onTile += SlideTile;
+    }
+    private void OnDisable()
+    {
+        Tile.onTile += SlideTile;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +30,7 @@ public class Tile : MonoBehaviour
         
     }
 
+    
     public void SetSM(SlideManager newSM)
     {
         SM = newSM;
@@ -26,9 +38,9 @@ public class Tile : MonoBehaviour
 
     public void AssignPosition()
     {
-        Debug.Log(SM.name);
+        //Debug.Log(SM.name);
         Position = SM.GetIndex(transform.gameObject);
-        Debug.Log(transform.gameObject.name + Position.Item1 + Position.Item2);
+        //Debug.Log(transform.gameObject.name + Position.Item1 + Position.Item2);
     }
 
     public void OnMouseDown()
