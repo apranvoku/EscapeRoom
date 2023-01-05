@@ -7,17 +7,7 @@ public class Tile : MonoBehaviour
 {
     public Tuple<int, int> Position;
     SlideManager SM;
-    public delegate void OnClick();
-    public static event OnClick onTile;
 
-    private void OnEnable()
-    {
-        Tile.onTile += SlideTile;
-    }
-    private void OnDisable()
-    {
-        Tile.onTile += SlideTile;
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -52,27 +42,27 @@ public class Tile : MonoBehaviour
     {
         int row = Position.Item1; //0 to 2
         int column = Position.Item2; // 0 to 2
-        Debug.Log("Sliding tile: " + transform.gameObject.name);
-        Debug.Log("Row is: " + row + ", column is: " + column);
+        //Debug.Log("Sliding tile: " + transform.gameObject.name);
+        //Debug.Log("Row is: " + row + ", column is: " + column);
         if (row + 1 < SM.slidePuzzle.GetLength(0) && SM.slidePuzzle[row+1, column] is null)
         {
             SlideDown(row, column);
-            Debug.Log("Slid down");
+            //Debug.Log("Slid down");
         }
         if (column + 1 < SM.slidePuzzle.GetLength(1) && SM.slidePuzzle[row, column + 1] is null)
         {
             SlideRight(row, column);
-            Debug.Log("Slid right");
+            //Debug.Log("Slid right");
         }
         if (row - 1 >= 0 && SM.slidePuzzle[row - 1, column] is null)
         {
             SlideUp(row, column);
-            Debug.Log("Slid up");
+            //Debug.Log("Slid up");
         }
         if (column - 1 >= 0 && SM.slidePuzzle[row, column - 1] is null)
         {
             SlideLeft(row, column);
-            Debug.Log("Slid left");
+            //Debug.Log("Slid left");
         }
         if(SM.shuffled)
         {

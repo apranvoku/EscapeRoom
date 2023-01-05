@@ -15,9 +15,9 @@ public class maze_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        //float horizontal = Input.GetAxis("Horizontal");
+        //float vertical = Input.GetAxis("Vertical");
         //Debug.Log(horizontal + ":" + vertical);
-        transform.Rotate(-vertical*0.3f, 0, horizontal*0.3f);
+        //transform.Rotate(-vertical*0.3f, 0, horizontal*0.3f);
     }
 }

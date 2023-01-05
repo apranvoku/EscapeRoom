@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SlideManager : MonoBehaviour
 {
+    public GameObject KeyPad;
+
     public GameObject First;
     public GameObject Second;
     public GameObject Third;
@@ -61,6 +63,7 @@ public class SlideManager : MonoBehaviour
                 if(childIndex == 8) //There is no child index 8, SInce there are 8 tiles indexed from 0 - 7 So we're done.
                 {
                     Debug.Log("Good job!");
+                    KeyPad.SetActive(true);
                     solved = true;
                     return;
                 }
