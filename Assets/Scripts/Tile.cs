@@ -52,22 +52,27 @@ public class Tile : MonoBehaviour
     {
         int row = Position.Item1; //0 to 2
         int column = Position.Item2; // 0 to 2
-
+        Debug.Log("Sliding tile: " + transform.gameObject.name);
+        Debug.Log("Row is: " + row + ", column is: " + column);
         if (row + 1 < SM.slidePuzzle.GetLength(0) && SM.slidePuzzle[row+1, column] is null)
         {
             SlideDown(row, column);
+            Debug.Log("Slid down");
         }
         if (column + 1 < SM.slidePuzzle.GetLength(1) && SM.slidePuzzle[row, column + 1] is null)
         {
             SlideRight(row, column);
+            Debug.Log("Slid right");
         }
         if (row - 1 >= 0 && SM.slidePuzzle[row - 1, column] is null)
         {
             SlideUp(row, column);
+            Debug.Log("Slid up");
         }
         if (column - 1 >= 0 && SM.slidePuzzle[row, column - 1] is null)
         {
             SlideLeft(row, column);
+            Debug.Log("Slid left");
         }
         if(SM.shuffled)
         {
@@ -80,21 +85,21 @@ public class Tile : MonoBehaviour
         SM.slidePuzzle[row, column] = null;
         SM.slidePuzzle[row + 1, column] = transform.gameObject;
         Position = Tuple.Create(row + 1, column);
-        transform.position += new Vector3(0, -2, 0);
+        transform.localPosition += new Vector3(0, -2, 0);
     }
     public void SlideRight(int row, int column)
     {
         SM.slidePuzzle[row, column] = null;
         SM.slidePuzzle[row, column + 1] = transform.gameObject;
         Position = Tuple.Create(row, column + 1);
-        transform.position += new Vector3(2, 0, 0);
+        transform.localPosition += new Vector3(-2, 0, 0);
     }
     public void SlideUp(int row, int column)
     {
         SM.slidePuzzle[row, column] = null;
         SM.slidePuzzle[row - 1, column] = transform.gameObject;
         Position = Tuple.Create(row - 1, column);
-        transform.position += new Vector3(0, 2, 0);
+        transform.localPosition += new Vector3(0, 2, 0);
     }
 
     public void SlideLeft(int row, int column)
@@ -102,6 +107,6 @@ public class Tile : MonoBehaviour
         SM.slidePuzzle[row, column] = null;
         SM.slidePuzzle[row, column - 1] = transform.gameObject;
         Position = Tuple.Create(row, column - 1);
-        transform.position += new Vector3(-2, 0, 0);
+        transform.localPosition += new Vector3(2, 0, 0);
     }
 }

@@ -20,10 +20,16 @@ public class DoorOpen : MonoBehaviour
 
     public void OpenDoors()
     {
-        for(float i = 0; i < 1; i+=Time.deltaTime)
+        StartCoroutine(DoorOpening());
+    }
+
+    public IEnumerator DoorOpening()
+    {
+        for (float i = 0; i < 1; i += Time.deltaTime)
         {
-            Door1.transform.Rotate(new Vector3(0f, i * 100f, 0f));
-            Door2.transform.Rotate(new Vector3(0f, -i * 100f, 0f));
+            Door1.transform.Rotate(new Vector3(0f, Time.deltaTime * 100f, 0f));
+            Door2.transform.Rotate(new Vector3(0f,-Time.deltaTime * 100f, 0f));
+            yield return null;
         }
         transform.GetComponent<BoxCollider>().enabled = false;
     }

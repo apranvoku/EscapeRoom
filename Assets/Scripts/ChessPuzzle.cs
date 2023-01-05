@@ -12,12 +12,14 @@ public class ChessPuzzle : MonoBehaviour
     public GameObject MatingSquare;
     public GameObject DoorArch;
     public static GameObject SelectedPiece;
+    public bool solved;
 
     public static int Move;
 
     void Start()
     {
         Move = 1;
+        solved = false;
     }
 
     public void StateMachine()
@@ -38,8 +40,9 @@ public class ChessPuzzle : MonoBehaviour
             Move = 4;
             Debug.Log("State 4");
         }
-        if (Move == 4 && SelectedPiece.name == "MatingSquare")
+        if (Move == 4 && SelectedPiece.name == "MatingSquare" && !solved)
         {
+            solved = true;
             StartCoroutine(RookMate());
             DoorArch.GetComponent<DoorOpen>().OpenDoors();
             Debug.Log("Chess Solved");
@@ -58,7 +61,7 @@ public class ChessPuzzle : MonoBehaviour
             Rook3.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = new Color(originalCol.r, originalCol.g, originalCol.b, 1f - i);
             yield return null;
         }
-        Destroy(Rook3);
+        Destroy(Rook3,2f);
         StartCoroutine(RookRecapture());
     }
 
@@ -83,7 +86,7 @@ public class ChessPuzzle : MonoBehaviour
             Rook1.transform.GetChild(0).GetComponent<MeshRenderer>().material.color = new Color(originalCol.r, originalCol.g, originalCol.b, 1f - i);
             yield return null;
         }
-        Destroy(Rook1);
+        Destroy(Rook1,2f);
     }
 
     // Update is called once per frame
