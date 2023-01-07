@@ -26,7 +26,7 @@ public class MazeFinish : MonoBehaviour
         Debug.Log("Success!");
         Floor.GetComponent<BoxCollider>().enabled = false;
         Destroy(transform.gameObject, 3f);
-        StartCoroutine(GameOver());
+        //StartCoroutine(GameOver());
     }
 
     public IEnumerator GameOver()
