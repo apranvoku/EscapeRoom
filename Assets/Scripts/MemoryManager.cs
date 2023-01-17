@@ -38,39 +38,60 @@ public class MemoryManager : MonoBehaviour
 
     public void SubmitPress(int tileIndex)
     {
-        if(clickable && tileIndex == memoryList[currentPointer])
+        if (clickable)
         {
-            currentPointer += 1;
-            //Debug.Log(currentPointer);
-            //Debug.Log(memoryList.Count);
-            if(currentPointer == memoryList.Count)
+            if (tileIndex == memoryList[currentPointer])
             {
-                if (memoryLength == memoryCap)
+                StartCoroutine(BlueGlow(tileIndex));
+                currentPointer += 1;
+                //Debug.Log(currentPointer);
+                //Debug.Log(memoryList.Count);
+                if (currentPointer == memoryList.Count)
                 {
-                    mirror.GetComponent<BoxCollider>().enabled = false;
-                    StartCoroutine(GlowGreen());
-                    //Success!
+                    clickable = false;
+                    if (memoryLength == memoryCap)
+                    {
+                        mirror.GetComponent<BoxCollider>().enabled = false;
+                        StartCoroutine(GlowGreen());
+                        //Success!
+                    }
+                    else
+                    {
+                        memoryLength += 1;
+                        GenerateMemoryList();
+                        currentPointer = 0;
+                    }
+
                 }
-                else
-                {
-                    memoryLength += 1;
-                    GenerateMemoryList();
-                    currentPointer = 0;
-                }
-                
+            }
+            else
+            {
+                currentPointer = 0;
+                clickable = false;
+                StartCoroutine(GlowRed());
             }
         }
-        else
-        {
-            currentPointer = 0;
-            clickable = false;
-            StartCoroutine(GlowRed());
-        }
+
     }
 
     public void GlowTiles()
     {
         StartCoroutine(TileGlow());
+    }
+
+    public IEnumerator BlueGlow(int tileIndex)
+    {
+        Color original = Color.white;
+        for (float x = 0; x < 1; x += Time.deltaTime * 2)
+        {
+            transform.GetChild(tileIndex).GetComponent<MeshRenderer>().material.color = Color.Lerp(original, Color.blue, x);
+            yield return null;
+        }
+        for (float x = 1; x > 0; x -= Time.deltaTime * 2)
+        {
+            transform.GetChild(tileIndex).GetComponent<MeshRenderer>().material.color = Color.Lerp(original, Color.blue, x);
+            yield return null;
+        }
     }
 
     public IEnumerator TileGlow()

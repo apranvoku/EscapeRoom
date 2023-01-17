@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class MazeFinish : MonoBehaviour
 {
-    public GameObject Floor;
-    public TMP_Text text;
+    public TMP_Text end;
+    public Image crosshair;
     public Image bg;
     // Start is called before the first frame update
     void Start()
@@ -24,19 +24,20 @@ public class MazeFinish : MonoBehaviour
     public void OnTriggerEnter(Collider Other)
     {
         Debug.Log("Success!");
-        Floor.GetComponent<BoxCollider>().enabled = false;
-        Destroy(transform.gameObject, 3f);
-        //StartCoroutine(GameOver());
+        StartCoroutine(GameOver());
+        transform.GetComponent<BoxCollider>().enabled = false;
     }
 
     public IEnumerator GameOver()
     {
         Color bgColor = bg.color;
-        Color textColor = text.color;
+        Color endColor = end.color;
+        Color crosshairColor = crosshair.color;
         for(float i = 0; i < 1; i+= Time.deltaTime/3f)
         {
             bg.color = Color.Lerp(bgColor, new Color(bgColor.r, bgColor.g, bgColor.b, 1f), i);
-            text.color = Color.Lerp(textColor, new Color(textColor.r, textColor.g, textColor.b, 1f), i);
+            end.color = Color.Lerp(endColor, new Color(endColor.r, endColor.g, endColor.b, 1f), i);
+            crosshair.color = Color.Lerp(crosshairColor, new Color(crosshairColor.r, crosshairColor.g, crosshairColor.b, 0f), i);
 
             yield return null;
         }

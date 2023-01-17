@@ -16,7 +16,10 @@ public class Portrait : MonoBehaviour
     {
         
     }
-
+    public void OnMouseDown()
+    {
+        OnClick();
+    }
     public void OnClick()
     {
         StartCoroutine(RotatePortrait());

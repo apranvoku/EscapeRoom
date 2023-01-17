@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class PadButton : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PadButton : MonoBehaviour
     void Start()
     {
         StairwayDoor = GameObject.Find("StairwayDoor");
-        EntryField = GameObject.Find("EntryField");
+        EntryField = GameObject.Find("InputField");
         InputField = EntryField.GetComponent<TMP_InputField>();
         InputField.text = "";
 
@@ -24,13 +25,18 @@ public class PadButton : MonoBehaviour
         
     }
 
+    public void OnMouseDown()
+    {
+        OnPress();
+        //Debug.Log("I've been pressed, tee hee!");
+    }
     public void OnPress()
     {
-        if (transform.GetSiblingIndex() >= 1 && transform.GetSiblingIndex() <= 10)
+        if (transform.GetSiblingIndex() >= 0 && transform.GetSiblingIndex() <= 9)
         {
-            InputField.text += (transform.GetSiblingIndex() - 1).ToString();
+            InputField.text += transform.GetSiblingIndex().ToString();
         }
-        else if(transform.GetSiblingIndex() == 11)
+        else if(transform.GetSiblingIndex() == 10)
         {
             if(InputField.text == "4236")
             {
@@ -39,7 +45,7 @@ public class PadButton : MonoBehaviour
             }
             //Confirm()
         }
-        else if (transform.GetSiblingIndex() == 12)
+        else if (transform.GetSiblingIndex() == 11)
         {
             InputField.text = "";
         }
